@@ -1,0 +1,9 @@
+function [L,S] = LightAndShapeEstimation(M)
+
+%% The function estimates the initial lighting and the shape matrix
+% Input is an nxp matrix where n is the number of warped images and p is
+% the number of pixels in each of them.
+
+
+
+end
