@@ -1,3 +1,4 @@
+
 im = imread('lfw/George_HW_Bush/George_HW_Bush_0010.jpg');
 ptcloud = pcread('./faceplys/face_mesh_000306.ply');
 locs = ptcloud.Location;
