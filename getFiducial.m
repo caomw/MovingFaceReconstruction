@@ -1,5 +1,7 @@
 function [DETS,PTS,DESCS] = getFiducial(im)
-
-run('./CLASS_facepipe_VJ_29-Sep-08b/demo');
+addpath './CLASS_facepipe_VJ_29-Sep-08b'
+run('./CLASS_facepipe_VJ_29-Sep-08b/init');
+[DETS,PTS,DESCS]=extfacedescs(opts,im,true);
+%run('./CLASS_facepipe_VJ_29-Sep-08b/demo');
 
 end

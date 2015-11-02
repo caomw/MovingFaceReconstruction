@@ -1,4 +1,4 @@
-im = imread('./lfw/George_W_Bush/George_W_Bush_0010.jpg');
+im = imread('lfw/George_HW_Bush/George_HW_Bush_0010.jpg');
 ptcloud = pcread('./faceplys/face_mesh_000306.ply');
 locs = ptcloud.Location;
 figure, showPointCloud(ptcloud);
@@ -15,18 +15,3 @@ n_left = [79.03, -71.2, 1240];
 mouth_right = [105.5, -23.84, 1228];
 mouth_left = [111.5, -72.14, 1251];
 Q = [re_rc;re_lc;le_rc;le_lc;n_right;n_center;n_left;mouth_right;mouth_left];
-Q_mean = mean(Q);
-Q_bar = Q - repmat(mean(Q),[9 1]);
-Q_bar = Q_bar';
-q_mean = mean(q');
-q = (q' - repmat(mean(q'),[9 1]))';
-A = q*Q_bar'*inv(Q_bar*Q_bar');
-temp = cross(A(1,:),A(2,:));
-A = [A(1,:);A(2,:);temp];
-[U,S,V] = svd(A);
-R = U*V';
-% Left eye (left corner:)
-%
-%
-%
-%
