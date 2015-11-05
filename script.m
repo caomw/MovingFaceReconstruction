@@ -1,18 +1,31 @@
 
+get_sre = false;
+ptcloudstuff = false;
+
+if get_sre
+f = load('init_model_Q.mat');
+Q = f.Q';
 im = imread('lfw/George_HW_Bush/George_HW_Bush_0010.jpg');
-ptcloud = pcread('./faceplys/face_mesh_000306.ply');
-locs = ptcloud.Location;
-figure, showPointCloud(ptcloud);
 [DETS,PTS,DESCS] = getFiducial(im);
-q = zeros(2,9);
-q = PTS(:,:,1);
-re_rc= [34.9, 2.458, 1230];
-re_lc = [37, -31.89, 1236];
-le_rc = [45.4, -66.51, 1248];
-le_lc = [41.24, -94.92, 1267];
-n_right = [82.49, -29.01, 1227];
-n_center = [80.5, -53.6, 1212];
-n_left = [79.03, -71.2, 1240];
-mouth_right = [105.5, -23.84, 1228];
-mouth_left = [111.5, -72.14, 1251];
-Q = [re_rc;re_lc;le_rc;le_lc;n_right;n_center;n_left;mouth_right;mouth_left];
+
+[s_estimated, R_estimated, t_estimated] = PoseNormalization(PTS, Q);
+end
+
+if ptcloudstuff
+    ptcloud = pcread('./faceplys/face_mesh_000306.ply');
+    locs = ptcloud.Location;
+    %figure, showPointCloud(ptcloud);
+    q_img = s_estimated*R_estimated*locs';
+    q_img = q_img + repmat(t_estimated, 1, size(q_img, 2));
+    
+end
+
+pixel_interp = GetImagePixelValues(im, q_img);
+
+I = DebugProjectedImage(im, pixel_interp, q_img);
+% Should show only the face part!!
+figure;
+imshow(I);
+
+figure, showPointCloud([locs(:, 1) locs(:, 2) locs(:, 3)], pixel_interp');
+

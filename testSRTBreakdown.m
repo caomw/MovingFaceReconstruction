@@ -8,5 +8,7 @@ R = u;
 t_ = round(rand(2, 1)*3);
 t = repmat(t_, 1, num_fiducials);
 q = s*R*Q + t;
+s_q = size(q)
+s_Q = size(Q)
 [s_estimated, R_estimated, t_estimated] = PoseNormalization(q, Q);
 q2 = s_estimated*R_estimated*Q + repmat(t_estimated, 1, num_fiducials);
