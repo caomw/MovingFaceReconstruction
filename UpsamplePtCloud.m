@@ -7,8 +7,8 @@ function [new_locations] = UpsamplePtCloud(pc)
 %   points.
 x_limits = pc.XLimits;
 y_limits = pc.YLimits;
-x1= double(linspace(x_limits(1)-1, x_limits(2) + 1, 400))';
-y1 = double(linspace(y_limits(1)-1, y_limits(2) + 1, 400))';
+x1= double(linspace(x_limits(1), x_limits(2), 800))';
+y1 = double(linspace(y_limits(1), y_limits(2), 1000))';
 [xq, yq] = meshgrid(x1, y1);
 
 ll = double(pc.Location);

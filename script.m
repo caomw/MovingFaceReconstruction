@@ -1,6 +1,7 @@
 
 get_sre = true;
 ptcloudstuff = true;
+upsample = true;
 
 if get_sre
 f = load('init_model_Q.mat');
@@ -13,7 +14,11 @@ end
 
 if ptcloudstuff
     ptcloud = pcread('./faceplys/face_mesh_000306.ply');
-    locs = UpsamplePtCloud(ptcloud);
+    if upsample
+        locs = UpsamplePtCloud(ptcloud);
+    else
+        locs = ptcloud.Location;
+    end
     %figure, showPointCloud(ptcloud);
     q_img = s_estimated*R_estimated*locs';
     q_img = q_img + repmat(t_estimated, 1, size(q_img, 2));
@@ -22,10 +27,10 @@ end
 
 pixel_interp = GetImagePixelValues(im, q_img);
 
-%I = DebugProjectedImage(im, pixel_interp, q_img);
-% Should show only the face part!!
-%figure;
-%imshow(I);
+I = DebugProjectedImage(im, pixel_interp, q_img);
+%Should show only the face part!!
+figure;
+imshow(I);
 
 figure, showPointCloud([locs(:, 1) locs(:, 2) locs(:, 3)], pixel_interp');
 

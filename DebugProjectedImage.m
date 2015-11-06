@@ -8,8 +8,12 @@ function [I] = DebugProjectedImage(im, pixel_interp, p)
 
 I = zeros(size(im));
 for i = 1:size(pixel_interp, 2)
-    u = round(p(2, i))
-    v = round(p(1, i))
+    u = round(p(2, i));
+    v = round(p(1, i));
+    tt = [u, v];
+    if (sum(isnan(tt)) > 0)
+        continue
+    end
     rgb = pixel_interp(:, i);
     I(u, v, :) = rgb';
 end
