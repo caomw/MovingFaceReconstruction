@@ -1,0 +1,10 @@
+%R2 = CancelRotation(R_estimated);
+R2 = CreateRotation(pi/2, 0, pi/9);
+Q = locs';
+%[Q Qmean] = MeanNormalize(Q1);
+s2 = [3 0 0; 0 3 0];
+q_img_2 = s2*R2*Q;
+q_img_2 = q_img_2 + repmat(t_estimated, 1, size(q_img_2, 2));
+I = DebugProjectedImage(im, pixel_interp, abs(q_img_2));
+figure;
+imshow(I);

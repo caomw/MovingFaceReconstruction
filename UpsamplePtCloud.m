@@ -17,6 +17,6 @@ vq = griddata(ll(:, 1), ll(:, 2), ll(:, 3), xq, yq);
 p1 = reshape(xq, [], 1);
 p2 = reshape(yq, [], 1);
 p3 = reshape(vq, [], 1);
-new_locations = [p1 p2 p3];
+new_locations = [p1 p2 p3; ll];
 end
 
