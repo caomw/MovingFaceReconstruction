@@ -1,9 +1,9 @@
-function [S_est] = LightAndShapeEstimation(M,L,S)
+function [S_est] = SurfaceNormalEstimation(M,L,S)
 
 %% Function to estimate surface normals at each pixel in the 3D model
 
 
-thresh = 1 % Play around with this threshold
+thresh = 100 % Play around with this threshold
 S_est = zeros(size(S));
 
 for i = 1:size(M,2)
@@ -14,7 +14,7 @@ for i = 1:size(M,2)
         
         M_j = M(j,i);
         S_j = S(:,i);
-   
+        L_j = L(j,:);
         dist = (M_j - L(j,:)*S_j)^2;
         
         if dist < thresh

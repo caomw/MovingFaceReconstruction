@@ -8,7 +8,9 @@ N = size(img,1);
 normals = zeros(N,3);
 for i = 1:N
     
-    normals(i,:) = normnd(img(i,:,:));
+    im = zeros(size(img,2),size(img,3));
+    im(:,:) = img(i,:,:);
+    normals(i,:) = normnd(im);
     
 end
 
