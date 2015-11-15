@@ -1,4 +1,4 @@
-function [I2, I] = MakeFrontalFace(im, templateFiduc, locs)
+function [I2, I, Iz] = MakeFrontalFace(im, templateFiduc, locs)
 
 [DETS,PTS,DESCS] = getFiducial(im);
 [s_estimated, R_estimated, t_estimated] = PoseNormalization(...
@@ -11,8 +11,9 @@ pixel_interp = GetImagePixelValues(im, q_img);
 R2 = CreateRotation(pi/2, 0, pi/9);
 %R2 = CancelRotation(R_estimated);
 s2 = [0.7 0 0; 0 0.7 0];
-q_img_2 = s2*R2*locs';
+z2 = R2*locs';
+q_img_2 = s2*z2;
 t2 = [0; 60];
 q_img_2 = q_img_2 + repmat(t2, 1, size(q_img_2, 2));
-[I2, I] = DebugProjectedImage(im, pixel_interp, q_img_2);
+[I2, I, Iz] = DebugProjectedImage(im, pixel_interp, q_img_2, z2);
 end
