@@ -1,0 +1,15 @@
+function [normals] =  computeNormals(img)
+
+
+% img is p x 36 x 3 ( I am assuming 6x6 patch )
+% pcnormals works only in R2015b
+%NormalsAll = pcnormals(ptCloud); 
+N = size(img,1);
+normals = zeros(N,3);
+for i = 1:N
+    
+    normals(i,:) = normnd(img(i,:,:));
+    
+end
+
+end

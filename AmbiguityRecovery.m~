@@ -1,0 +1,27 @@
+function [L,S] = AmbiguityRecovery(M,S)
+
+L = M*S'*inv(S*S');
+
+% We choose images which fit L well
+
+thresh = 1;
+idx_selected = [];
+for i = 1:size(L,1)
+    
+    error = norm(M(i,:) - L(i,:)*S);
+    
+    if error < thresh
+        
+        idx_selected = [idx_selected; i];
+        
+    end
+end
+
+% Estimate Ambiguity
+A = eye(4);
+% 
+M = M(idx_selected,:);
+L = inv(A)*M*S'*inv(S*S');
+s 
+
+end
