@@ -1,4 +1,4 @@
-function [L,S] = AmbiguityRecovery(M,S,im, normals)
+function [L,S] = AmbiguityRecovery(M,S, normals)
 
 L = M*S'*inv(S*S');
 

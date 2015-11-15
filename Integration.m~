@@ -18,13 +18,9 @@ z_hat = intgrad2(fx,fy);
 
 Z = reshape(z_hat,[1 p]);
 
-% I am little skeptical about it
-X = repmat(1:sx,[1 p/sx]);
+X = repmat(1:sx,[]);
 
-Y = [];
-for i = 1:p/sy
-   Y = [Y i*ones(1,sy)];
-end
+Y = 1:sy;
 
 % Estimate the constants a,b,c
 a = 0;
