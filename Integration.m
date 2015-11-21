@@ -14,6 +14,7 @@ end
 fx = reshape(z_grad(1,:),[sx sy]);
 fy = reshape(z_grad(2,:),[sx sy]);
 
+% Check If the integration is correct
 z_hat = intgrad2(fx,fy);
 
 Z = reshape(z_hat,[1 p]);
@@ -31,6 +32,7 @@ a = 0;
 b = 0;
 c = 1;
 
-
 Z_true = a*X + b*Y + c*Z;
+
+
 end

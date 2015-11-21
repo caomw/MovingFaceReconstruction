@@ -15,5 +15,6 @@ z2 = R2*locs';
 q_img_2 = s2*z2;
 t2 = [0; 60];
 q_img_2 = q_img_2 + repmat(t2, 1, size(q_img_2, 2));
+z2 = locs';
 [I2, I, Iz] = DebugProjectedImage(im, pixel_interp, q_img_2, z2);
 end

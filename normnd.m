@@ -15,7 +15,7 @@ function varargout = normnd(data,varargin)
 %       % Plot
 %       figure; scatter3(data(:,1),data(:,2),data(:,3));
 %       hold on; quiver3(mean(data(:,1)),mean(data(:,2)),mean(data(:,3)),v(1),v(2),v(3))
-%
+
 %   See also: cov, eig.
 %
 %

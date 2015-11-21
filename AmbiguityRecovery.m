@@ -23,9 +23,11 @@ end
 %% I am assuing Albeldo if the template to be 0.6 (Don't know why!)
 %normals = [0.6*ones(size(normals,1),1) normals];
 
-%A = normals'*S'*inv(S*S');
+sx = size(S,2);
+A = normals(:,1:sx)*S'*inv(S*S');
 
-A = eye(4);
+
+%A = eye(4);
 
 % Recalculate L and S 
 M = M(idx_selected,:);
