@@ -1,0 +1,19 @@
+function [locs_new] = ChangeTemplate(locs,z, Iz)
+
+    locs_new = locs;
+    sx = size(Iz,1);
+    sy = size(Iz,2);
+
+    for i = 1:sx
+        for j = 1:sy
+            
+            temp = find((locs(:,1) == Iz(i,j,1)) & (locs(:,2) == Iz(i,j,2)));
+
+            if temp
+            
+            end
+
+            
+        end
+    end
+end
