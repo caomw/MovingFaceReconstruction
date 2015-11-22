@@ -50,6 +50,7 @@ for i = 1:size(pixel_interp, 2)
     end
 end
 
+
 I2 = I(min_u:max_u, min_v:max_v, :);
 Iz = Iz(min_u:max_u, min_v:max_v, :);
 end
