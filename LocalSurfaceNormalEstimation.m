@@ -3,9 +3,9 @@ function [S_est] = LocalSurfaceNormalEstimation(M,L,S)
 %% Function to estimate surface normals at each pixel in the 3D model
 
 
-thresh = 100 % Play around with this threshold
+thresh = 1; % Play around with this threshold
 S_est = zeros(size(S));
-
+count = 0;
 for i = 1:size(M,2)
     
     M_train = [];
@@ -16,15 +16,17 @@ for i = 1:size(M,2)
         S_j = S(:,i);
         L_j = L(j,:);
         dist = (M_j - L(j,:)*S_j)^2;
-        
+        dist
         if dist < thresh
             % Add image to the training set
             M_train = [M_train;M_j];
             L_train = [L_train;L_j];
+           
         end
     end
     % Estimate S_j over these images
     S_est(:,i) = inv(L_train'*L_train + diag([-1;1;1;1]))*L_train'*M_train;
+    
 end
 
 end

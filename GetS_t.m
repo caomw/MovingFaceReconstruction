@@ -1,4 +1,14 @@
-load Iz.mat;
+%load Iz.mat;
+s1 = size(Iz,1);
+s2 = size(Iz,2);
+Iz_temp = Iz;
+for i = 1:s1
+    for j = 1:s2
+        Iz_temp(i,j,1) = i;
+        Iz_temp(i,j,2) = j;
+    end
+end
+
 util;
 Shape =  computeNormalsIz(Iz_temp);
 

@@ -5,7 +5,7 @@ L = M*S'*inv(S*S');
 p = size(S,2);
 % We choose images which fit L well
 
-thresh = 1;
+thresh = 15;
 idx_selected = [];
 for i = 1:size(L,1)
     
