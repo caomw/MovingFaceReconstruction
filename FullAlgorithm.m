@@ -10,11 +10,12 @@ GetS_t;
  sx = size(I2,1);
  sy = size(I2,2);
 
+ db = load('ghw_bush_images_fiducs.mat');
 for i = 1:10
     i
     %load M_GeorgeBush.mat
     GetS_t;
-    [M] = GetMMatrix(dir_name, templateFiduc, locs);
+    [M] = GetMMatrix(db.db_images, templateFiduc, locs);
     
     [L,S] = InitialLightAndShapeEstimation(M);
     [S_est] = LocalSurfaceNormalEstimation(M,L,S);
