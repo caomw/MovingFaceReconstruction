@@ -8,6 +8,10 @@ for i = 1:p
     zx = -S(2,i)/S(4,i);
     zy = -S(3,i)/S(4,i);
     
+    if S(4,i) == 0
+       zx = 0;
+       zy = 0;
+    end
     z_grad(:,i) = [zx;zy;-1]./sqrt(1 + zx.^2 + zy.^2);
     
 end
