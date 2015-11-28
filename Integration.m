@@ -33,7 +33,7 @@ end
 
 % Estimate the constants a,b,c
 a = 0;
-b = 0;
+b = 0.1;
 c = 1;
 
 Z_true = a*X + b*Y + c*Z;
