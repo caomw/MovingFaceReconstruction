@@ -1,5 +1,6 @@
-function [DETS,PTS,DESCS]=extfacedescs(opts,img,debug)
+function [DETS,PTS,DESCS, success]=extfacedescs(opts,img,debug)
 
+success = true;
 if nargin<3
     debug=false;
 end
@@ -27,7 +28,16 @@ else
 end
 
 detector = vision.CascadeObjectDetector();
+
 BB = step(detector,I);
+if(size(BB, 1) == 0)
+    fprintf('Warning: img returned 0 in size(BB). Not doing anything\n');
+    DETS = 0;
+    PTS = 0;
+    DESCS = 0;
+    success = false;
+    return;
+end
 BB = BB(1,:);
 temp = BB(2);
 BB(2) = BB(1) + BB(3);
