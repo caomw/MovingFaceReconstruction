@@ -5,10 +5,10 @@ function [para] = get_default_cflow_para()
 
 alpha = 0.012;
 ratio = 0.75;
-minWidth = 20;
-nOuterFPIterations = 7;
+minWidth = 60; %20;
+nOuterFPIterations = 5; %7;
 nInnerFPIterations = 1;
-nSORIterations = 30;
+nSORIterations = 50;
 
 para = [alpha,ratio,minWidth,nOuterFPIterations,nInnerFPIterations,nSORIterations];
 

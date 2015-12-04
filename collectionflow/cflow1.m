@@ -25,6 +25,8 @@ for i = 1:max_iter
     k = k + 1;
 end
 
+save('gwbush_M_flat.mat', 'M', 'M_iter_1', 'S_r');
+
 num_images = size(M_iter_1, 2);
 for i = 1:30
     I = reshape(M_iter_1(:, i), S_r, []);

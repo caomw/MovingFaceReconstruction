@@ -1,25 +1,29 @@
 addpath('OpticalFlow');
- 
-f = load('gwbush_M_flat.mat') 
-%f = load('fullm_500.mat')
+f = load('gwbush_M_flat.mat');
 M = f.M;
 Mflat = f.M_iter_1;
 S_r = 150;
 para = get_default_cflow_para();
-%para = [0.1    0.7500   45.0000    1.0000    1.0000   55.0000];
 
-k = 11
-%k = 22;
-I1 = reshape(M(:, k), S_r, []);
-I1f = reshape(Mflat(:, k), S_r, []);
+k1 = 25;
+I1 = reshape(M(:, k1), S_r, []);
+I1f = reshape(Mflat(:, k1), S_r, []);
 
-if true
-    [vx1, vy1, wi] = Coarse2FineTwoFrames(I1, I1f, para);
-    I3 = WarpImage(I1, -vx1, -vy1);
-    ShowImages(I1, I1f, 'I1 and I1f');
-    ShowImages(I1, I3, 'I1 and I3(trying to get flat)');
-    return;
-end
+k2 = 57;
+I2 = reshape(M(:, k2), S_r, []);
+I2f = reshape(Mflat(:, k2), S_r, []);
+
+ShowImages(I1, I2, 'morph input');
+mv = MakeMorphVideo(I1, I1f, I2, I2f, 35);
+
+
+implay(mv);
+
+return;
+
+ShowImages(I2, I2f, 'orig');
+ShowImages(I2, I3, 't1');
+return;
 
 % 1. alpha = 0.012;
 % 2. ratio = 0.75;
