@@ -1,5 +1,6 @@
-f = load('../gwbush_M_300_refined.mat');
-M = f.M';
+%f = load('../gwbush_M_300_refined.mat');
+f = load('../gwbush_M.mat');
+M = f.fullM';
 para = get_default_cflow_para();
 
 max_iter = 8;
