@@ -1,26 +1,19 @@
+f = load('../gwbush_M_300_refined.mat');
+M = f.M';
+para = get_default_cflow_para();
 
-alpha = 0.012;
-ratio = 0.75;
-minWidth = 20;
-nOuterFPIterations = 7;
-nInnerFPIterations = 1;
-nSORIterations = 30;
-
-para = [alpha,ratio,minWidth,nOuterFPIterations,nInnerFPIterations,nSORIterations];
-
-max_iter = 6;
+max_iter = 8;
 M_orig = M;
-M_k = M2;
 
 M_iter_1 = M_orig;
 k = 4;
 
-flow_norm_thresh = 50;
+flow_norm_thresh = 5;
 S_r = 150;
 
 for i = 1:max_iter
     tic
-    [Mnew, flow_norm] = RunCollectionFlow(M_iter_1, k, S_r, para);
+    [Mnew, flow_norm] = RunCollectionFlowIkI1Inv(M_iter_1, k, S_r, para);
     toc
     M_iter_1 = Mnew;
     i
@@ -32,7 +25,7 @@ for i = 1:max_iter
 end
 
 num_images = size(M_iter_1, 2);
-for i = 1:num_images
+for i = 1:30
     I = reshape(M_iter_1(:, i), S_r, []);
     I_orig = reshape(M(:, i), S_r, []);
     figure;

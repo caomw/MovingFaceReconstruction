@@ -17,12 +17,15 @@ th = 0;
  S_all = cell(20,1);
  M_all = cell(20,1);
  count = 0;
+
+R2 = CreateRotation(pi/2, 0, pi/9);
+t2 = [0; 60];
+
 for i = 1:10
     i
     %load M_GeorgeBush.mat
-    [M, Iz] = GetMMatrix(db.db_images, templateFiduc, locs);
+    [M, Iz] = GetMMatrix(db.db_images, templateFiduc, locs, R2, t2);
     GetS_t;
-    
     
     [L,S] = InitialLightAndShapeEstimation(M);
    % DebugInitLightAndShape;

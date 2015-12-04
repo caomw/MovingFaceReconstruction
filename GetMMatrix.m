@@ -1,4 +1,4 @@
-function [M, Iz] = GetMMatrix(db_images, templateFiduc, locs)
+function [M, Iz] = GetMMatrix(db_images, templateFiduc, locs, R2, t2)
 % Get the M matrix for a given directory.
 %   Returns n (num_images) x p (num_pixels) matrix. Each entry is the
 %   grayscale value.
@@ -13,7 +13,7 @@ tic
 for i = 1:num_images
     db = db_images{i};
     I2 = im2double(...
-        rgb2gray(MakeFrontalFace(db.im, db.fiduc, templateFiduc, locs)));
+        rgb2gray(MakeFrontalFace(db.im, db.fiduc, templateFiduc, locs, R2, t2)));
     M(i, :) = reshape(I2, 1, []);
     if(mod(i, 10) == 1)
         i
