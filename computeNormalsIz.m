@@ -1,7 +1,8 @@
 function [normals] =  computeNormalsIz(Iz)
 
-albeldo = 0.6; % Assumption
+albeldo = 0.3; % Assumption
 [nx,ny,nz] = surfnorm(Iz(:,:,1),Iz(:,:,2),Iz(:,:,3));
+
 sx = size(Iz,1);
 sy = size(Iz,2);
 
