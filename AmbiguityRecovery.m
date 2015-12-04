@@ -5,12 +5,13 @@ L = M*S'*inv(S*S');
 p = size(S,2);
 % We choose images which fit L well
 
-thresh = 15;
+thresh = 10;
 idx_selected = [];
+errors = [];
 for i = 1:size(L,1)
     
     error = norm(M(i,:) - L(i,:)*S);
-    
+    errors = [errors;error];
     if error < thresh
         
         idx_selected = [idx_selected; i];

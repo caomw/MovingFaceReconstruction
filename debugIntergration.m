@@ -11,4 +11,4 @@ for i = 1:sx
 end
 
 pcloud = pointCloud(Iz_temp);
-showPointCloud(pcloud);
+figure, showPointCloud(pcloud);

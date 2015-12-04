@@ -4,14 +4,14 @@ f = load('init_face_data1.mat');
 templateFiduc = f.templateFiduc;
 locs = f.locs;
 %GetS_t;
-dir_name = 'lfw/George_HW_Bush';
+dir_name = 'lfw/George_W_Bush';
 
 %  im = imread('lfw/George_HW_Bush/George_HW_Bush_0003.jpg');
 %  [I2, ~, Iz] = MakeFrontalFace(im, templateFiduc, locs);
 %  sx = size(I2,1);
 %  sy = size(I2,2);
 th = 0;
- db = load('ghw_bush_images_fiducs.mat');
+ db = load('gw_bush_images_fiducs.mat');
  LOCS = cell(20,1);
  L_all = cell(20,1);
  S_all = cell(20,1);
@@ -24,7 +24,11 @@ t2 = [0; 60];
 for i = 1:10
     i
     %load M_GeorgeBush.mat
-    [M, Iz] = GetMMatrix(db.db_images, templateFiduc, locs, R2, t2);
+    %[M, Iz] = GetMMatrix(db.db_images, templateFiduc, locs, R2, t2);
+    %[M, Iz] = GetMMatrix(db.db_images, templateFiduc, locs);
+    load gwbush_M;
+    Iz = fullIz;
+    M = fullM;
     GetS_t;
     
     [L,S] = InitialLightAndShapeEstimation(M);
@@ -33,7 +37,7 @@ for i = 1:10
     [L,S] = AmbiguityRecovery(M,S_est, S_t);
    % DebugInitLightAndShape;
     [Z_true] = Integration(S,sx,sy);
-    [locs] = ChangeTemplate(locs,Z_true,Iz);
+    %[locs] = ChangeTemplate(locs,Z_true,Iz);
     a = svd(M);
     th_old = th;
     th = a(5) + a(6);
