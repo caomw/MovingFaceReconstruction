@@ -1,9 +1,16 @@
 %f = load('../gwbush_M_300_refined.mat');
-f = load('../gwbush_M.mat');
-M = f.fullM';
+mrgb = Loadrgbfrontalfaces();
+num_images = numel(mrgb);
+
+[m, n, k] = size(mrgb{1});
+M = zeros(m*n*k, num_images);
+for i = 1:num_images
+    M(:, i) = reshape(mrgb{i}, [], 1);
+end
+
 para = get_default_cflow_para();
 
-max_iter = 28;
+max_iter = 5;
 M_orig = M;
 
 M_iter_1 = M_orig;
@@ -25,12 +32,12 @@ for i = 1:max_iter
     k = k + 1;
 end
 
-save('gwbush_M_flat.mat', 'M', 'M_iter_1', 'S_r');
+%save('gwbush_M_flat.mat', 'M', 'M_iter_1', 'S_r');
 
-num_images = size(M_iter_1, 2);
+%num_images = size(M_iter_1, 2);
 for i = 1:30
-    I = reshape(M_iter_1(:, i), S_r, []);
-    I_orig = reshape(M(:, i), S_r, []);
+    I = reshape(M_iter_1(:, i),[m, n, k]);
+    I_orig = reshape(M(:, i), [m, n, k]);
     figure;
     subplot(1, 2, 1);
     imshow(I_orig);

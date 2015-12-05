@@ -1,4 +1,4 @@
-function [M3, flow_norm] = RunCollectionFlowIkI1Inv(M_orig, k, m, para)
+function [M3, flow_norm] = RunCollectionFlowIkI1Inv(M_orig, k, im_size, para)
 % Run the collection flow algorithm.
 %   M_orig: Original M matrix (num_pixels x num_images) matrix.
 %   k: The k to perform rank-k approximization.
@@ -25,10 +25,10 @@ fprintf('Starting flow...\n');
 tic
 for i = 1:num_images
     I_original = M_orig(:, i);
-    I_original = reshape(I_original, m, []);
+    I_original = reshape(I_original, im_size);
     
     I_rank_k = M_k(:, i);
-    I_rank_k = reshape(I_rank_k, m, []);
+    I_rank_k = reshape(I_rank_k, im_size);
     
     [vx, vy, I3] = Coarse2FineTwoFrames(I_rank_k, I_original, para);
     %[vx, vy, I3] = Coarse2FineTwoFrames(I_original, I_rank_k, para);
