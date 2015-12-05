@@ -5,7 +5,7 @@ Mflat = f.M_iter_1;
 S_r = 150;
 para = get_default_cflow_para();
 
-k1 = 25;
+k1 = 55;
 I1 = reshape(M(:, k1), S_r, []);
 I1f = reshape(Mflat(:, k1), S_r, []);
 
@@ -14,7 +14,7 @@ I2 = reshape(M(:, k2), S_r, []);
 I2f = reshape(Mflat(:, k2), S_r, []);
 
 ShowImages(I1, I2, 'morph input');
-mv = MakeMorphVideo(I1, I1f, I2, I2f, 35);
+mv = MakeMorphVideo(I1, I1f, I2, I2f, 15);
 
 
 implay(mv);
