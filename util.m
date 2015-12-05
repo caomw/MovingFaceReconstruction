@@ -1,4 +1,5 @@
 Iz_temp = Iz;
+%
 for i = 1:size(Iz,1)
     for j = 1:size(Iz,2)
     
