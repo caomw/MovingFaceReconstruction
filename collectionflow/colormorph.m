@@ -11,7 +11,7 @@ end
 M(isnan(M)) = 0;
 
 k = 4;
-max_iter = 5;
+max_iter = 30;
 M_flat = M;
 
 flow_norm_thresh = 5;
@@ -24,6 +24,8 @@ for i = 1:max_iter
     end
     k = k + 1;
 end
+SaveAsParts(M_flat, 'flat_rgb_gbush');
+
 
 
 for i = 1:30
