@@ -21,6 +21,7 @@ fy = reshape(z_grad(2,:),[sx sy]);
 imagesc(fx);
 figure, imagesc(fy);
 figure, imshow(fx);
+figure, imshow(fy);
 % Check If the integration is correct
 z_hat = intgrad2(fx,fy);
 
@@ -34,20 +35,35 @@ for i = 1:p/sy
    Y = [Y i*ones(1,sy)];
 end
 
+%Y = repmat(1:sy,[1 p/sy]);
+
+%X = [];
+%for i = 1:p/sx
+%   X = [X i*ones(1,sx)];
+%end
+
+
 % Estimate the constants a,b,c
 %corresp1 = [130,55,8.632; 60,94,-8.5; 63,72,-6.862];
 %corresp2 = [36,58,-12.93; 61,21,-6.2; 60,46,-6.897];
-corresp1 = [59,19,-19.7;29,62,-20.49;82,87,-2.303];
-corresp2 = [65,99,9.884;129,56,-12.29;79,27,-22.59];  
+%Z = Z + abs(min(Z)) + 50;
+
+corresp1 = [59,19,z_hat(59,19);29,62,z_hat(29,62);82,87,z_hat(82,87)];
+corresp2 = [65,99,z_hat(65,99);129,56,z_hat(29,62);79,27,z_hat(79,27)];  
+%corresp1 = [59,19,-19.7;29,62,-20.49;82,87,-2.303];
+%corresp2 = [65,99,9.884;129,56,-12.29;79,27,-22.59];  
 U = corresp1 - corresp2;
 [v,~] = eig(U);
 a = v(1,3)
 b = v(2,3)
 c = v(3,3)
+%a = 0;
+%b = 0; 
+%c = 1;
 %a = -0.01;
 %b = -0.1;
 %c = 1;
 Z_true = (a*X + b*Y + c*Z);
-
+min(Z_true)
 
 end

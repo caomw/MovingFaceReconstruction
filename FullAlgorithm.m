@@ -18,17 +18,23 @@ th = 0;
  M_all = cell(20,1);
  count = 0;
 
-R2 = CreateRotation(pi/2, 0, pi/9);
-t2 = [0; 60];
-
+%R2 = CreateRotation(pi/2, 0, pi/9);
+%t2 = [0; 60];
+R2 = CreateRotation(0,0,0);
+%R2(2,1) = 1;
+t2 = [0;0];
+load gwbush_M;
+    Iz = fullIz;
+    M = fullM;
+    
 for i = 1:10
     i
     %load M_GeorgeBush.mat
-    %[M, Iz] = GetMMatrix(db.db_images, templateFiduc, locs, R2, t2);
+    if i > 1
+    [M, Iz] = GetMMatrix(db.db_images, templateFiduc, locs, R2, t2);
+    end
     %[M, Iz] = GetMMatrix(db.db_images, templateFiduc, locs);
-    load gwbush_M;
-    Iz = fullIz;
-    M = fullM;
+    
     GetS_t;
     
     [L,S] = InitialLightAndShapeEstimation(M);
@@ -37,7 +43,21 @@ for i = 1:10
     [L,S] = AmbiguityRecovery(M,S_est, S_t);
    % DebugInitLightAndShape;
     [Z_true] = Integration(S,sx,sy);
-    %[locs] = ChangeTemplate(locs,Z_true,Iz);
+    z = reshape(Z_true,sx,sy);
+    Mflat = LoadAsParts('flat_rgb_gbush');
+    im = reshape(Mflat(:,58),[150,116,3]);
+    
+    %fiduc = [[63;101;-27.93],[57;68;-45.59],[59;49;-43.65],[59;22;-32.59],[91;76;-41.6],[85;59;-55.65],[90;45;-45.44],[116;80;-35.97],[112;34;-36.59]];
+    fiduc = [[63;101;z(63,101)],[57;68;z(57,68)],[59;49;z(59,49)],[59;22;z(59,22)],[91;76;z(91,76)],[85;59;z(85,59)],[90;45;z(90,45)],[116;80;z(116,80)],[112;34;z(112,34)]];
+    fiduc = fiduc + [zeros(1,9);zeros(1,9);50*ones(1,9)];
+    templateFiduc = fiduc;
+   %  tem = templateFiduc(2,:);
+   %  templateFiduc(2,:) = templateFiduc(1,:);
+   %I  templateFiduc(1,:) = tem;
+    load Fiduc_Glass.mat %loads variable fiduc_grass 3x4
+    % Estimate sRT, then add the transformed co-ordinates onto it.
+    debugIntegration_glass
+    [locs] = ChangeTemplate(locs,Z_true,Iz);
     a = svd(M);
     th_old = th;
     th = a(5) + a(6);

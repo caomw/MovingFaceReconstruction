@@ -28,4 +28,17 @@ end
 % 5. nInnerFPIterations = 1;
 % 6. nSORIterations = 30;
 
+<<<<<<< Updated upstream
 
+=======
+opticFlow = opticalFlowHS;
+
+ShowImages(I1, w1);
+flow = estimateFlow(opticFlow,I2,I1);
+flow1 = estimateFlow(opticFlow,I2);
+vx = flow.Vx;
+vy = flow.Vy;
+I3 = WarpImage(I1,vx,vy);
+%I3 = WarpImage(I1, vy1 , vx1 );
+ShowImages(I1, I3);
+>>>>>>> Stashed changes
